@@ -1,0 +1,4 @@
+#!/bin/bash
+# Changes all Mp3's to clip_{sequential number} such as clip_01,clip02
+i=1; for file in *.mp3; do mv "$file" "clip_$((i++)).mp3"; done
+

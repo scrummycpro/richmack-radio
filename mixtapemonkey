@@ -1,0 +1,9 @@
+
+#!/bin/bash
+
+#mixtape_maker
+
+# Takes all mp3's,shuffles 3 of the mp3 files,concats mp3s into
+# a mixtape named the current date/time in Nanaseconds
+
+ls -1 *mp3|shuf -n5|xargs -n1 -I% echo "file '%'"> mixtape_draft && ffmpeg -f concat -i mixtape_draft -c copy $(date +%N)_mixtape.mp3

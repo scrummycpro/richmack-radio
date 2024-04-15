@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# A script to produce podcast
+# Required: ffmpeg coreutils
+# Required: change_name_monkey episode_smasher    pitchmonkey        quietmonkey        segmonkey
+# bash radio-ninja <Podcast-name>
+
+#change name of each file to "clip"_{sequential number}
+
+bash change_name_monkey
+
+# split into 90 second segment
+ls -1 clip_*mp3*|xargs -n1 -I% bash segmonkey %
+
+#Change pitch of each segment to 80%
+ls -1 clip_*mp3_*|xargs -n1 -I% bash pitchmonkey %
+
+
+# Combine 20 random clips together in to separate episode
+bash episode_smasher
+
+
+# Remove all the quiet parts from the episodes
+ls -1 *draft_*|xargs -n1 -I% bash quietmonkey %
+
+# Make a folder named after podcast_title
+
+mkdir $1
+
+# Copy all mp3's with "noquiet"in to the folder
+cp *noquiet.mp3 $1/
+
+# Enter to folder
+cd $1
+
+# enumerate each mp3 episode name
+i=1; for file in *.mp3; do mv "$file" ""$1"_$((i++)).mp3"; done

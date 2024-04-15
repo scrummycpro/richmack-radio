@@ -1,0 +1,2 @@
+ffmpeg -i "$1" -map 0 -c copy -f segment -segment_time 90 "$1_%03d.mp3"
+

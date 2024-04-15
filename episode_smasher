@@ -1,0 +1,1 @@
+ls -1 slowed*mp3|shuf -n20|xargs -n1 -I% echo "file '%'"> mixtape_draft && ffmpeg -f concat -i mixtape_draft -c copy draft_episode.mp3 && rm mixtape_draft

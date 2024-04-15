@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Changes pitch of clips to 80% to mask voice
+
+ffmpeg -i "$1" -filter:a "atempo=0.8" "slowed_$(basename "$1")"
+
